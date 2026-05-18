@@ -39,7 +39,7 @@ const Home = () => {
   const teamMembers = [
     {
       name: "Mr. Hariom Saini",
-      title: "Founder Of Fitscalez &\nDirector of  Pvt. Ltd.",
+      title: "Founder Of Fitscalez",
       image: teamMember,
     },
     {
