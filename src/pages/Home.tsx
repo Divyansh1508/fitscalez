@@ -39,22 +39,12 @@ const Home = () => {
   const teamMembers = [
     {
       name: "Mr. Hariom Saini",
-      title: "Founder Of Fitscalez &\nDirector of SCGS Pvt. Ltd.",
+      title: "Founder Of Fitscalez &\nDirector of  Pvt. Ltd.",
       image: teamMember,
     },
     {
       name: "Ms. Anshul Sharma",
       title: "Partner Of Fitscalez",
-      image: teamMember,
-    },
-    {
-      name: "Mr. Gaurav Bansal",
-      title: "Founder & Director of\nSCGS Pvt. Ltd.",
-      image: teamMember,
-    },
-    {
-      name: "Mrs. Ritu Bansal",
-      title: "Director of SCGS Pvt. Ltd.",
       image: teamMember,
     },
   ];
@@ -78,8 +68,6 @@ const Home = () => {
             <div className="h-1 w-32 bg-primary mx-auto" />
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               Digital, IT & Cyber Tech Solutions Fitscalez
-              <br/>
-              BPO Division Powered by SCGS
             </p>
           </div>
         </div>

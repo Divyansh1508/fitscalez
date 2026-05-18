@@ -12,7 +12,6 @@ import Projects from "./pages/Projects";
 import Blog from "./pages/Blog";
 import Career from "./pages/Career";
 import Contact from "./pages/Contact";
-import Scgs from "./pages/Scgs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,7 +29,6 @@ const App = () => (
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/scgs" element={<Scgs />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/career" element={<Career />} />
