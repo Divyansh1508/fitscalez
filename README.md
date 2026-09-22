@@ -1,73 +1,57 @@
-# Welcome to your Lovable project
+# Fitscalez — Agency Website
 
-## Project info
+Official website for **Fitscalez**, a Web Development & Digital Marketing Agency based in Delhi, India.
 
-**URL**: https://lovable.dev/projects/45d2a839-33ab-4fa1-b6a4-1e386ad55f2a
+## 🚀 Overview
 
-## How can I edit this code?
+Fitscalez delivers full-stack web development (MERN), digital marketing, search engine optimization (SEO), social media handling, and creative production for growing businesses.
 
-There are several ways of editing your application.
+- **Website**: [https://fitscalez.com](https://fitscalez.com)
+- **Contact**: +91-9599433616 | fitscalezofficial@gmail.com
+- **Address**: 24, Shri Ram Road, Civil Lines, Delhi, India - 110054
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/45d2a839-33ab-4fa1-b6a4-1e386ad55f2a) and start prompting.
+## 📁 Project Structure
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+fitscalez/
+├── index.html           # Homepage
+├── about.html           # About Fitscalez, mission & leadership
+├── services.html        # Agency services & detailed packages
+├── projects.html        # Portfolio & client case studies
+├── blog.html            # Insights, tech & marketing articles
+├── career.html          # Career opportunities & open roles
+├── contact.html         # Contact form & location details
+├── robots.txt           # Search crawler directives
+├── sitemap.xml          # XML sitemap for SEO
+├── favicon.ico          # Browser favicon
+├── css/
+│   └── style.css        # Core styling, responsive design & animations
+├── js/
+│   └── main.js          # Navigation, interactions & mobile menus
+└── images/              # Optimized brand logos and portfolio media
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🛠️ Tech Stack
 
-**Use GitHub Codespaces**
+- **Markup**: Semantic HTML5 with JSON-LD Structured Data
+- **Styling**: Vanilla CSS3 (Custom Design System, Responsive Layouts, Micro-animations)
+- **Scripting**: Vanilla JavaScript (ES6+)
+- **SEO & Meta**: Complete Open Graph, Twitter Cards, Canonical links & XML Sitemap
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 💻 Local Preview
 
-This project is built with:
+Simply open `index.html` in any modern web browser or serve via any static web server:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+# Using Python
+python -m http.server 3000
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/45d2a839-33ab-4fa1-b6a4-1e386ad55f2a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Using Node (npx)
+npx serve .
+```
