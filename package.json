@@ -4,6 +4,6 @@
   "private": true,
   "description": "Fitscalez Agency Website",
   "scripts": {
-    "build": "echo 'Static website ready'"
+    "build": "node build.js"
   }
 }
