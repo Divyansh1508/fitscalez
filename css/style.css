@@ -40,6 +40,16 @@
   box-sizing: border-box;
 }
 
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -334,28 +344,69 @@ input, textarea, select {
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   cursor: pointer;
-  padding: 5px;
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hamburger:hover {
+  background: rgba(108, 99, 255, 0.22);
+  border-color: var(--primary-light);
+  box-shadow: 0 0 16px rgba(108, 99, 255, 0.35);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.hamburger.open {
+  background: rgba(255, 101, 132, 0.16);
+  border-color: rgba(255, 101, 132, 0.45);
+  box-shadow: 0 0 16px rgba(255, 101, 132, 0.25);
 }
 
 .hamburger span {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
-  background: var(--text);
+  background: #ffffff;
   border-radius: 2px;
-  transition: var(--transition);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, background-color 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger:hover span {
+  background: #ffffff;
+}
+
+.hamburger.open span {
+  background: #ffffff;
 }
 
 .hamburger.open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: translateY(7px) rotate(45deg);
 }
+
 .hamburger.open span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
+
 .hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Mobile Nav */
@@ -366,15 +417,17 @@ input, textarea, select {
   left: 0;
   right: 0;
   background: rgba(10, 11, 15, 0.98);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 24px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  padding: 16px 20px 24px;
   flex-direction: column;
   gap: 8px;
   z-index: 999;
   transform: translateY(-10px);
   opacity: 0;
-  transition: var(--transition);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
 }
 
 .mobile-nav.open {
@@ -383,18 +436,52 @@ input, textarea, select {
   opacity: 1;
 }
 
+.mobile-nav-brand {
+  display: none;
+}
+
 .mobile-nav a {
-  padding: 12px 16px;
-  border-radius: 8px;
+  padding: 13px 18px;
+  border-radius: 10px;
   font-weight: 500;
-  color: var(--text-muted);
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 10px;
   transition: var(--transition);
 }
 
-.mobile-nav a:hover,
+.mobile-nav a:hover {
+  color: var(--white);
+  background: rgba(108, 99, 255, 0.14);
+  border-color: rgba(108, 99, 255, 0.3);
+  transform: translateX(4px);
+}
+
 .mobile-nav a.active {
   color: var(--white);
-  background: rgba(108, 99, 255, 0.1);
+  font-weight: 600;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.25) 0%, rgba(108, 99, 255, 0.08) 100%);
+  border-color: rgba(108, 99, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.2);
+}
+
+.mobile-nav a[href^="tel:"] {
+  margin-top: 6px;
+  background: rgba(67, 233, 123, 0.08);
+  border-color: rgba(67, 233, 123, 0.25);
+  color: var(--accent2) !important;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.mobile-nav a[href^="tel:"]:hover {
+  background: rgba(67, 233, 123, 0.16);
+  border-color: var(--accent2);
+  transform: none;
 }
 
 /* ---- Hero Section ---- */
@@ -2208,6 +2295,13 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .navbar {
+    background: rgba(10, 11, 15, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(108, 99, 255, 0.15);
+  }
+
   .nav-links, .nav-cta {
     display: none;
   }
