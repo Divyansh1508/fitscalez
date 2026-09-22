@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fitscalez.com/sitemap.xml
+
+# Fitscalez - Web Development & Digital Marketing Agency
+# Delhi, India | +91 9599433616
