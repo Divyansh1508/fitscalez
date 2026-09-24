@@ -53,6 +53,9 @@ button {
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -61,7 +64,9 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
 }
 
 a {
@@ -536,15 +541,26 @@ input, textarea, select {
 
 .hero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 20px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
+.hero-title .line1,
 .hero-title .line2 {
   display: block;
+}
+
+#typedText {
+  display: inline-block;
+  min-height: 1.2em;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .hero-subtitle {
@@ -2315,7 +2331,12 @@ footer {
   }
 
   .hero-title {
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 5vw, 2.15rem);
+    line-height: 1.2;
+  }
+
+  #typedText {
+    min-height: 1.2em;
   }
 
   .page-hero {
@@ -2367,6 +2388,19 @@ footer {
     padding: 0 16px;
   }
 
+  .hero-content {
+    padding: 40px 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.45rem, 5.8vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  #typedText {
+    min-height: 1.25em;
+  }
+
   .hero-stats {
     flex-wrap: wrap;
     justify-content: center;
@@ -2382,6 +2416,12 @@ footer {
 
   .services-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.35rem;
   }
 }
 

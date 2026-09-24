@@ -144,20 +144,25 @@ contactForm?.addEventListener('submit', (e) => {
 });
 
 // ---- Typed Text Effect ---- //
-function typeWriter(el, texts, speed = 80, pause = 2000) {
+function typeWriter(el, texts, speed = 80, pause = 2200) {
   let textIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
+  let charIndex = texts[0].length;
+  let isDeleting = true;
+
+  // Initial text is already rendered in HTML; pause before beginning first deletion
+  setTimeout(type, pause);
 
   function type() {
     const currentText = texts[textIndex];
 
     if (isDeleting) {
-      el.textContent = currentText.substring(0, charIndex - 1);
       charIndex--;
+      const textToDisplay = currentText.substring(0, charIndex);
+      // Non-breaking space prevents element height from collapsing to 0
+      el.textContent = textToDisplay || '\u00A0';
     } else {
-      el.textContent = currentText.substring(0, charIndex + 1);
       charIndex++;
+      el.textContent = currentText.substring(0, charIndex);
     }
 
     if (!isDeleting && charIndex === currentText.length) {
@@ -168,12 +173,12 @@ function typeWriter(el, texts, speed = 80, pause = 2000) {
     if (isDeleting && charIndex === 0) {
       isDeleting = false;
       textIndex = (textIndex + 1) % texts.length;
+      setTimeout(type, speed * 2);
+      return;
     }
 
     setTimeout(type, isDeleting ? speed / 2 : speed);
   }
-
-  type();
 }
 
 const typedEl = document.getElementById('typedText');
@@ -182,7 +187,7 @@ if (typedEl) {
     'Web Development',
     'Digital Marketing',
     'SEO Optimization',
-    'Social Media Marketing',
+    'Social Media',
     'Brand Strategy',
     'Video Production'
   ]);
