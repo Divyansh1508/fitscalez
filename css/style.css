@@ -2273,14 +2273,40 @@ footer {
 }
 
 /* ---- Responsive ---- */
+
+/* === Tablet landscape & small desktop (max 1024px) === */
 @media (max-width: 1024px) {
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-links a {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
+  .nav-phone {
+    display: none;
+  }
+
   .hero-content {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 40px;
+  }
+
+  .hero-text {
+    max-width: 100%;
   }
 
   .hero-visual {
     display: none;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-stats {
@@ -2296,6 +2322,26 @@ footer {
     gap: 48px;
   }
 
+  .about-text .section-tag,
+  .about-text .section-title {
+    text-align: center;
+  }
+
+  .about-desc {
+    text-align: center;
+  }
+
+  .about-text .btn {
+    display: inline-flex;
+    margin: 0 auto;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
@@ -2308,8 +2354,60 @@ footer {
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid .testimonial-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .cta-section {
+    padding: 60px 40px;
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-padding {
+    padding: 80px 0;
+  }
 }
 
+/* === Tablet portrait (max 768px) — switch to hamburger nav === */
 @media (max-width: 768px) {
   .navbar {
     background: rgba(10, 11, 15, 0.92);
@@ -2331,8 +2429,12 @@ footer {
   }
 
   .hero-title {
-    font-size: clamp(1.8rem, 5vw, 2.15rem);
-    line-height: 1.2;
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    line-height: 1.15;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
   }
 
   #typedText {
@@ -2347,13 +2449,30 @@ footer {
     padding: 50px 24px;
   }
 
+  .cta-section h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+
+  .cta-contact-strip {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cta-contact-strip .divider {
+    display: none;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 28px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
   }
 
   .footer-bottom {
@@ -2366,7 +2485,12 @@ footer {
   }
 
   .about-values {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .process-steps::before {
@@ -2375,14 +2499,94 @@ footer {
 
   .hero-stats {
     gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
   }
 
   .counters-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
+  .counter-number {
+    font-size: 2rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    padding: 24px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonials-grid .testimonial-card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-name {
+    font-size: 1.3rem;
+  }
+
+  .price-amount {
+    font-size: 2.4rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
 }
 
+/* === Mobile (max 480px) === */
 @media (max-width: 480px) {
   .container {
     padding: 0 16px;
@@ -2393,8 +2597,8 @@ footer {
   }
 
   .hero-title {
-    font-size: clamp(1.45rem, 5.8vw, 1.75rem);
-    line-height: 1.2;
+    font-size: clamp(2rem, 7.5vw, 2.6rem);
+    line-height: 1.15;
   }
 
   #typedText {
@@ -2404,24 +2608,111 @@ footer {
   .hero-stats {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 16px;
+  }
+
+  .stat-number {
+    font-size: 1.4rem;
   }
 
   .counters-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .counter-number {
+    font-size: 1.8rem;
+  }
+
+  .counter-item {
+    padding: 24px 14px;
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
+    max-width: none;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
   }
+
+  .service-card {
+    padding: 20px;
+  }
+
+  .about-values {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .section-padding {
+    padding: 50px 0;
+  }
+
+  .section-title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .pricing-card {
+    padding: 24px;
+  }
+
+  .price-amount {
+    font-size: 2rem;
+  }
+
+  .cta-section {
+    padding: 40px 16px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.88rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.3rem;
+  }
+
+  .scroll-top {
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 360px) {
   .hero-title {
-    font-size: 1.35rem;
+    font-size: 1.85rem;
   }
 }
 
