@@ -137,6 +137,27 @@ contactForm?.addEventListener('submit', (e) => {
   submitBtn.textContent = 'Sending...';
   submitBtn.disabled = true;
 
+  // Save lead to localStorage
+  try {
+    const lead = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+      name: contactForm.querySelector('#name')?.value || '',
+      email: contactForm.querySelector('#email')?.value || '',
+      phone: contactForm.querySelector('#phone')?.value || '',
+      company: contactForm.querySelector('#company')?.value || '',
+      service: contactForm.querySelector('#service')?.value || '',
+      budget: contactForm.querySelector('#budget')?.value || '',
+      message: contactForm.querySelector('#message')?.value || '',
+      status: 'new',
+      timestamp: Date.now()
+    };
+    const leads = JSON.parse(localStorage.getItem('fitscalez_leads') || '[]');
+    leads.push(lead);
+    localStorage.setItem('fitscalez_leads', JSON.stringify(leads));
+  } catch (err) {
+    console.warn('Could not save lead:', err);
+  }
+
   setTimeout(() => {
     contactForm.style.display = 'none';
     if (formSuccess) formSuccess.style.display = 'block';
