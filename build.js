@@ -19,6 +19,8 @@ const itemsToCopy = [
   'contact.html',
   'projects.html',
   'services.html',
+  'privacy.html',
+  'terms.html',
   'lead.html',
   'robots.txt',
   'sitemap.xml',
