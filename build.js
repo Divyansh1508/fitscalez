@@ -31,7 +31,8 @@ const itemsToCopy = [
   'favicon.ico',
   'css',
   'js',
-  'images'
+  'images',
+  'blog'
 ];
 
 for (const item of itemsToCopy) {
