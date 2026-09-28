@@ -2,6 +2,20 @@
 // FITSCALEZ - Main JavaScript
 // =============================================
 
+// ---- Auto-load Fitscalez Visitor Tracking & Analytics Engine ---- //
+(function() {
+  if (typeof window === 'undefined' || window.FitscalezTracker) return;
+  try {
+    const isSubdir = window.location.pathname.includes('/blog/') && !window.location.pathname.endsWith('blog.html');
+    const script = document.createElement('script');
+    script.src = (isSubdir ? '../' : '') + 'js/analytics.js';
+    script.async = true;
+    document.head.appendChild(script);
+  } catch (e) {
+    console.warn('[Fitscalez] Tracker load init:', e);
+  }
+})();
+
 // ---- Navigation ---- //
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
@@ -137,8 +151,9 @@ contactForm?.addEventListener('submit', (e) => {
   submitBtn.textContent = 'Sending...';
   submitBtn.disabled = true;
 
-  // Save lead to localStorage
+  // Save lead to localStorage with visitor & device intelligence
   try {
+    const devContext = window.FitscalezTracker ? window.FitscalezTracker.getDeviceContext() : null;
     const lead = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
       name: contactForm.querySelector('#name')?.value || '',
@@ -149,7 +164,16 @@ contactForm?.addEventListener('submit', (e) => {
       budget: contactForm.querySelector('#budget')?.value || '',
       message: contactForm.querySelector('#message')?.value || '',
       status: 'new',
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      // Rich Visitor & Device Intelligence
+      deviceId: devContext?.deviceId || (window.FitscalezTracker ? window.FitscalezTracker.getDeviceId() : 'DEV-DIRECT'),
+      visitCount: devContext?.visitCount || 1,
+      isReturning: devContext ? devContext.isReturning : false,
+      pastVisitsCount: devContext?.pastVisitsCount || 0,
+      lastVisit: devContext?.lastVisit || Date.now(),
+      location: devContext?.location || null,
+      device: devContext?.device || null,
+      journey: devContext?.journey || []
     };
     const leads = JSON.parse(localStorage.getItem('fitscalez_leads') || '[]');
     leads.push(lead);
