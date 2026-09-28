@@ -81,17 +81,23 @@
     } catch (e) {}
   }
 
-  // Generate unique Device ID formatted e.g. DEV-8F2B-4A1C
+  // Generate simple unique Device ID e.g. DEV-4A2B
   function generateDeviceId() {
-    function randHex(len) {
-      var chars = '0123456789ABCDEF';
-      var res = '';
-      for (var i = 0; i < len; i++) {
-        res += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return res;
+    var chars = '0123456789ABCDEF';
+    var code = '';
+    for (var i = 0; i < 4; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    return 'DEV-' + randHex(4) + '-' + randHex(4);
+    return 'DEV-' + code;
+  }
+
+  // Format any Device ID simply for clean UI display
+  function formatSimpleDeviceId(id) {
+    if (!id) return 'DEV-USER';
+    var str = String(id).trim();
+    var match = str.match(/^(DEV-[A-Za-z0-9]{4})/i);
+    if (match) return match[1].toUpperCase();
+    return str.length > 8 ? str.substring(0, 8).toUpperCase() : str.toUpperCase();
   }
 
   // Get or initialize persistent Device ID
@@ -807,6 +813,7 @@
     clearAnalyticsData: clearAnalyticsData,
     formatRelativeTime: formatRelativeTime,
     formatExactTime: formatExactTime,
+    formatSimpleDeviceId: formatSimpleDeviceId,
     KEYS: KEYS
   };
 });

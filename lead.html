@@ -884,13 +884,14 @@
     .act-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 8px 12px;
       min-width: 0;
       flex: 1;
     }
     .act-icon {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -907,27 +908,6 @@
     .act-icon.tablet {
       background: rgba(67, 233, 123, 0.12);
       border-color: rgba(67, 233, 123, 0.25);
-    }
-    .act-path-wrap {
-      min-width: 0;
-      flex: 1;
-    }
-    .act-path {
-      font-family: 'Space Grotesk', monospace;
-      font-weight: 600;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-      font-size: 0.86rem;
-    }
-    .act-title {
-      font-size: 0.72rem;
-      color: var(--dash-text-dim);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .act-right {
       display: flex;
@@ -1154,104 +1134,221 @@
     }
 
     /* ========================================================
-       RESPONSIVE MEDIA QUERIES (MOBILE FIRST COMPATIBILITY)
+       RESPONSIVE MEDIA QUERIES (ENHANCED MOBILE COMPATIBILITY)
        ======================================================== */
     @media (max-width: 900px) {
       .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .act-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .act-left {
-        width: 100%;
-      }
-      .act-right {
-        width: 100%;
-        justify-content: space-between;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, 0.04);
+      .insights-grid {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 600px) {
       :root {
-        --dash-nav-h: 62px;
+        --dash-nav-h: 56px;
       }
       .dash-nav-inner {
         padding: 0 12px;
       }
+      .dash-logo-img {
+        height: 24px;
+      }
       .dash-live-badge span:last-child {
-        display: none; /* Keep just the green pulsing dot on tiny screens */
+        display: none; /* Just pulse dot on tiny screens */
       }
       .dash-live-badge {
         padding: 4px 6px;
       }
+      .dash-nav-right .btn {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+      }
       .container {
-        padding: 0 12px;
+        padding: 0 10px;
       }
       .dash-header {
-        padding: 16px 0 14px;
-        margin-bottom: 18px;
+        padding: 14px 0 12px;
+        margin-bottom: 14px;
       }
       .dash-header-row {
-        gap: 12px;
-        margin-bottom: 14px;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .dash-title h1 {
+        font-size: 1.3rem;
+      }
+      .dash-title p {
+        font-size: 0.8rem;
       }
       .dash-header-actions {
         width: 100%;
-        justify-content: flex-start;
       }
+      .dash-header-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* iOS-Style Segmented Tabs */
       .dash-tabs {
         width: 100%;
+        background: var(--dash-bg2);
+        border-radius: 10px;
+        padding: 3px;
+        border: 1px solid var(--dash-border);
+        margin-bottom: 14px;
+        gap: 4px;
       }
       .dash-tab {
-        flex: 1;
+        flex: 1 1 50%;
         justify-content: center;
-        padding: 9px 10px;
-        font-size: 0.84rem;
+        padding: 8px 6px;
+        font-size: 0.8rem;
+        border-radius: 7px;
+        border-bottom: none;
+        margin-bottom: 0;
       }
+      .dash-tab.active {
+        background: var(--dash-card);
+        border: 1px solid var(--dash-border-strong);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Compact KPI Grid */
       .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 16px;
       }
       .kpi-card {
-        padding: 12px 14px;
+        padding: 10px 12px;
       }
       .kpi-val {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+        margin-bottom: 2px;
       }
+      .kpi-lbl {
+        font-size: 0.68rem;
+      }
+      .kpi-badge {
+        font-size: 0.65rem;
+        padding: 1px 5px;
+      }
+
+      /* Native-style 2-column filter row */
       .toolbar {
-        flex-direction: column;
-        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 10px;
+        margin-bottom: 14px;
       }
-      .toolbar-search, .toolbar-select {
+      .toolbar-search {
         width: 100%;
+        flex: 1 1 100%;
+        font-size: 0.82rem;
+        padding: 8px 10px;
       }
+      .toolbar-select {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+        font-size: 0.78rem;
+        padding: 8px 6px;
+      }
+
+      /* Lead Card Enhancements */
       .lead-card {
-        padding: 16px 14px;
+        padding: 14px 12px;
+      }
+      .lead-name {
+        font-size: 1.05rem;
+      }
+      .lead-details-grid {
+        gap: 8px 12px;
+        font-size: 0.8rem;
       }
       .lead-intel-ribbon {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 8px;
+        padding: 8px 10px;
+      }
+      .lead-intel-info {
+        gap: 6px 10px;
       }
       .lead-actions {
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        width: 100%;
       }
       .lead-actions .btn {
         width: 100%;
+        padding: 8px 4px;
+        font-size: 0.76rem;
+        justify-content: center;
       }
-      .spec-grid {
-        grid-template-columns: 1fr;
+
+      /* Visitor Stream Card on Mobile */
+      .act-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+        gap: 8px;
+      }
+      .act-left {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+      }
+      .act-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        gap: 6px;
+      }
+      .act-time {
+        font-size: 0.72rem;
+      }
+
+      /* Modal on Mobile */
+      .modal-backdrop {
+        padding: 8px;
       }
       .modal-dialog {
         max-height: 94vh;
+        border-radius: 12px;
+      }
+      .modal-header {
+        padding: 14px 16px;
+      }
+      .modal-header h3 {
+        font-size: 1rem;
+      }
+      .modal-content {
+        padding: 14px 12px;
+        gap: 14px;
       }
       .map-iframe {
-        height: 200px;
+        height: 180px;
+      }
+      .spec-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .spec-card {
+        padding: 8px 10px;
+      }
+
+      /* Login card on Mobile */
+      .login-card {
+        padding: 28px 18px;
       }
     }
   </style>
@@ -1317,7 +1414,6 @@
           </div>
           <div class="dash-header-actions">
             <button class="btn primary sm" id="exportBtn">📥 Export CSV</button>
-            <button class="btn danger sm" id="resetBtn" title="Clear all stored data">🧹 Reset</button>
           </div>
         </div>
 
@@ -1511,7 +1607,7 @@
 
           <!-- Activity Toolbar -->
           <div class="toolbar" style="margin-bottom: 14px;">
-            <input type="text" class="toolbar-search" id="trafficSearch" placeholder="🔍 Filter by path, Device ID, city, OS, or browser..." />
+            <input type="text" class="toolbar-search" id="trafficSearch" placeholder="🔍 Filter by Device ID, city, OS, or browser..." />
             <select class="toolbar-select" id="trafficDevFilter">
               <option value="all">All Devices</option>
               <option value="desktop">💻 Desktop</option>
@@ -1754,17 +1850,6 @@
       showToast('Dashboard updated with latest data!');
     });
 
-    document.getElementById('resetBtn')?.addEventListener('click', () => {
-      const confirmReset = confirm('Are you sure you want to clear all data? This will remove leads and traffic history from this browser.');
-      if (!confirmReset) return;
-      localStorage.removeItem(LEADS_KEY);
-      if (window.FitscalezTracker) {
-        window.FitscalezTracker.clearAnalyticsData();
-      }
-      renderAll();
-      showToast('All stored data has been cleared.');
-    });
-
     // ---- Leads Management ---- //
     function getStoredLeads() {
       try {
@@ -1876,6 +1961,9 @@
 
         // Visitor intel
         const deviceId = lead.deviceId || 'DEV-SITE';
+        const simpleId = (window.FitscalezTracker && window.FitscalezTracker.formatSimpleDeviceId)
+          ? window.FitscalezTracker.formatSimpleDeviceId(deviceId)
+          : (deviceId.length > 8 ? deviceId.substring(0, 8) : deviceId);
         const visitCount = lead.visitCount || 1;
         const isReturning = lead.isReturning || visitCount > 1;
         const loc = lead.location || {};
@@ -1917,8 +2005,8 @@
             <!-- Visitor Intelligence Ribbon -->
             <div class="lead-intel-ribbon">
               <div class="lead-intel-info">
-                <span class="device-pill" onclick="copyVal('${deviceId}', 'Device ID')" title="Click to copy Device ID">
-                  💻 ${deviceId} 📋
+                <span class="device-pill" onclick="copyVal('${deviceId}', 'Device ID')" title="Click to copy full Device ID: ${deviceId}">
+                  💻 ${simpleId} 📋
                 </span>
                 <span class="visit-tag ${isReturning ? 'returning' : 'new'}">
                   ${isReturning ? `🔁 ${visitCount} Visits` : '🌟 1st Visit'}
@@ -2103,31 +2191,33 @@
         const loc = p.location || {};
         const locCity = loc.city || 'Unknown';
         const locFlag = loc.flag || '📍';
+        const devId = p.deviceId || 'DEV-USER';
+        const simpleId = (window.FitscalezTracker && window.FitscalezTracker.formatSimpleDeviceId)
+          ? window.FitscalezTracker.formatSimpleDeviceId(devId)
+          : (devId.length > 8 ? devId.substring(0, 8) : devId);
         const relTime = FitscalezTracker.formatRelativeTime(p.timestamp);
+        const devSummary = `${dev.os || 'OS'} • ${dev.browser || 'Browser'}`;
 
         return `
           <div class="act-item">
             <div class="act-left">
               <div class="act-icon ${devType}" title="${dev.os || 'OS'} • ${dev.browser || 'Browser'}">${devIcon}</div>
-              <div class="act-path-wrap">
-                <span class="act-path" title="${escapeHtml(p.path)}">${escapeHtml(p.path)}</span>
-                <span class="act-title">${escapeHtml(p.title || 'Page')}</span>
-              </div>
-            </div>
-
-            <div class="act-right">
-              <span class="device-pill" onclick="copyVal('${p.deviceId}', 'Device ID')" title="Click to copy Device ID">
-                ${p.deviceId} 📋
+              <span class="device-pill" onclick="copyVal('${devId}', 'Device ID')" title="Click to copy full Device ID: ${devId}">
+                ${simpleId} 📋
               </span>
               <span class="visit-tag ${isRet ? 'returning' : 'new'}">
                 ${isRet ? `🔁 ${p.visitNumber || 2} Visits` : '🌟 New'}
               </span>
+              <span style="font-size: 0.78rem; color: var(--dash-text-dim);">${escapeHtml(devSummary)}</span>
+            </div>
+
+            <div class="act-right">
               <button class="location-btn" onclick="openLocationModalForDevice('${p.deviceId}')">
                 ${locFlag} ${escapeHtml(locCity)}
               </button>
               <div class="act-time">${relTime}</div>
               <button class="btn sm" onclick="openLocationModalForDevice('${p.deviceId}')" title="Inspect full visitor profile">
-                🔍
+                🔍 Details
               </button>
             </div>
           </div>
@@ -2209,7 +2299,11 @@
       const loc = dossier.location || {};
       const dev = dossier.device || {};
 
-      document.getElementById('modalTitle').textContent = `Visitor: ${dossier.deviceId} (${loc.city || 'Location'})`;
+      const simpleId = (window.FitscalezTracker && window.FitscalezTracker.formatSimpleDeviceId)
+        ? window.FitscalezTracker.formatSimpleDeviceId(dossier.deviceId)
+        : (dossier.deviceId && dossier.deviceId.length > 8 ? dossier.deviceId.substring(0, 8) : (dossier.deviceId || 'DEV-USER'));
+
+      document.getElementById('modalTitle').textContent = `Visitor: ${simpleId} (${loc.city || 'Location'})`;
 
       // Map Setup
       const mapIframe = document.getElementById('mapIframe');
@@ -2235,7 +2329,8 @@
       document.getElementById('specIp').textContent = loc.ip || '—';
       document.getElementById('specIsp').textContent = loc.isp || 'Broadband Network';
 
-      document.getElementById('specDeviceId').textContent = dossier.deviceId;
+      document.getElementById('specDeviceId').textContent = simpleId;
+      document.getElementById('specDeviceId').setAttribute('title', 'Full ID: ' + (dossier.deviceId || ''));
       document.getElementById('specDeviceType').textContent = `${dev.type || 'Desktop'} (${dev.screen || 'Unknown Resolution'})`;
       document.getElementById('specOs').textContent = dev.os || 'Unknown OS';
       document.getElementById('specBrowser').textContent = dev.browser || 'Unknown Browser';
