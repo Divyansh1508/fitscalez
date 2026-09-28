@@ -639,230 +639,67 @@
     };
   }
 
-  // Generate Realistic Demo Data (so admin can inspect rich charts & locations right away)
-  function generateDemoData() {
-    var cities = [
-      { city: 'Mumbai', region: 'Maharashtra', country: 'India', flag: '🇮🇳', lat: 19.0760, lon: 72.8777, isp: 'Reliance Jio 5G' },
-      { city: 'Bengaluru', region: 'Karnataka', country: 'India', flag: '🇮🇳', lat: 12.9716, lon: 77.5946, isp: 'Airtel Fiber' },
-      { city: 'Delhi', region: 'NCR', country: 'India', flag: '🇮🇳', lat: 28.6139, lon: 77.2090, isp: 'Tata Play Fiber' },
-      { city: 'Bhopal', region: 'Madhya Pradesh', country: 'India', flag: '🇮🇳', lat: 23.2547, lon: 77.4029, isp: 'Reliance Jio Infocomm' },
-      { city: 'Pune', region: 'Maharashtra', country: 'India', flag: '🇮🇳', lat: 18.5204, lon: 73.8567, isp: 'ACT Fibernet' },
-      { city: 'Hyderabad', region: 'Telangana', country: 'India', flag: '🇮🇳', lat: 17.3850, lon: 78.4867, isp: 'Hathway Broadband' },
-      { city: 'Chennai', region: 'Tamil Nadu', country: 'India', flag: '🇮🇳', lat: 13.0827, lon: 80.2707, isp: 'Airtel Broadband' },
-      { city: 'London', region: 'Greater London', country: 'United Kingdom', flag: '🇬🇧', lat: 51.5074, lon: -0.1278, isp: 'Vodafone UK' },
-      { city: 'New York', region: 'New York', country: 'United States', flag: '🇺🇸', lat: 40.7128, lon: -74.0060, isp: 'Verizon Fios' }
+  // Purge any demo visit records, demo devices, and demo leads from storage
+  function purgeDemoData() {
+    var demoDeviceIds = [
+      'DEV-A94E-12BF', 'DEV-8C3D-94A1', 'DEV-4E10-58F2', 'DEV-F72B-19D4',
+      'DEV-3B90-67CA', 'DEV-5E88-A014', 'DEV-D219-4CB5', 'DEV-981F-72EE'
     ];
 
-    var pages = [
-      { path: '/index.html', title: 'Fitscalez — Web Development & Digital Marketing Agency' },
-      { path: '/services.html', title: 'Services — Web Dev, SEO & PPC | Fitscalez' },
-      { path: '/projects.html', title: 'Our Work & Case Studies | Fitscalez' },
-      { path: '/blog.html', title: 'Fitscalez Growth & Tech Blog' },
-      { path: '/blog/what-is-business-intelligence.html', title: 'What is Business Intelligence? | Fitscalez' },
-      { path: '/blog/website-development-cost-in-india.html', title: 'Website Development Cost in India (2025 Guide) | Fitscalez' },
-      { path: '/contact.html', title: 'Contact Fitscalez — Let’s Build Something Amazing' },
-      { path: '/about.html', title: 'About Fitscalez Agency' }
-    ];
-
-    var sources = ['Direct', 'Google Search', 'Google Search', 'LinkedIn', 'Instagram', 'Bing', 'WhatsApp', 'Twitter / X'];
-
-    var demoDevices = [
-      { id: 'DEV-A94E-12BF', type: 'desktop', os: 'Windows 10/11', browser: 'Chrome 124', screen: '1920x1080', visits: 5 },
-      { id: 'DEV-8C3D-94A1', type: 'mobile', os: 'iOS', browser: 'Safari 17', screen: '390x844', visits: 3 },
-      { id: 'DEV-4E10-58F2', type: 'desktop', os: 'macOS', browser: 'Chrome 125', screen: '2560x1440', visits: 2 },
-      { id: 'DEV-F72B-19D4', type: 'mobile', os: 'Android', browser: 'Chrome Mobile', screen: '412x915', visits: 1 },
-      { id: 'DEV-3B90-67CA', type: 'tablet', os: 'iOS', browser: 'Safari 17', screen: '820x1180', visits: 4 },
-      { id: 'DEV-5E88-A014', type: 'desktop', os: 'Windows 10/11', browser: 'Edge 124', screen: '1920x1080', visits: 1 },
-      { id: 'DEV-D219-4CB5', type: 'mobile', os: 'Android', browser: 'Samsung Internet', screen: '384x854', visits: 6 },
-      { id: 'DEV-981F-72EE', type: 'desktop', os: 'Linux', browser: 'Firefox 126', screen: '1920x1080', visits: 2 }
-    ];
-
-    var newPvs = [];
-    var registry = storage.get(KEYS.DEVICES, {});
-    var now = Date.now();
-
-    demoDevices.forEach(function (d, devIdx) {
-      var loc = cities[devIdx % cities.length];
-      var fakeIp = '103.' + (20 + devIdx * 7) + '.' + (110 + devIdx * 12) + '.' + (15 + devIdx * 19);
-
-      var fullGeo = {
-        ip: fakeIp,
-        city: loc.city,
-        region: loc.region,
-        country: loc.country,
-        countryCode: loc.country === 'India' ? 'IN' : loc.country === 'United States' ? 'US' : 'GB',
-        flag: loc.flag,
-        lat: loc.lat,
-        lon: loc.lon,
-        postal: '400001',
-        isp: loc.isp,
-        asn: 'AS' + (55000 + devIdx * 137),
-        timezone: loc.country === 'India' ? 'Asia/Kolkata' : loc.country === 'United States' ? 'America/New_York' : 'Europe/London',
-        _cachedAt: now
-      };
-
-      var devInfo = {
-        type: d.type,
-        os: d.os,
-        browser: d.browser,
-        screen: d.screen,
-        viewport: d.screen,
-        language: loc.country === 'India' ? 'en-IN' : 'en-US',
-        platform: d.os.includes('Win') ? 'Win32' : d.os.includes('Mac') ? 'MacIntel' : 'Linux',
-        cores: 8
-      };
-
-      registry[d.id] = {
-        deviceId: d.id,
-        visitCount: d.visits,
-        firstVisit: now - (d.visits * 24 * 60 * 60 * 1000 + 3600000),
-        lastVisit: now - (devIdx * 45 * 60 * 1000 + 120000),
-        lastActive: now - (devIdx * 12 * 60 * 1000),
-        totalPageViews: d.visits * 3,
-        device: devInfo,
-        location: fullGeo
-      };
-
-      // Generate 2-4 page views per demo device
-      var numViews = Math.min(4, d.visits + 1);
-      for (var v = 0; v < numViews; v++) {
-        var page = pages[(devIdx + v) % pages.length];
-        var viewTime = now - (devIdx * 18 * 60 * 1000 + v * 3 * 60 * 1000 + Math.floor(Math.random() * 60000));
-        newPvs.push({
-          id: 'pv_demo_' + d.id + '_' + v,
-          deviceId: d.id,
-          path: page.path,
-          title: page.title,
-          timestamp: viewTime,
-          sessionId: 'sess_demo_' + d.id,
-          visitNumber: d.visits,
-          isReturning: d.visits > 1,
-          pastVisitsCount: d.visits - 1,
-          lastVisit: now - (d.visits * 12 * 60 * 60 * 1000),
-          referrer: sources[(devIdx + v) % sources.length],
-          device: devInfo,
-          location: fullGeo
-        });
-      }
+    // 1. Clean Page Views
+    var pvs = storage.get(KEYS.PAGE_VIEWS, []);
+    var cleanedPvs = pvs.filter(function (p) {
+      if (!p) return false;
+      var id = String(p.id || '');
+      var sess = String(p.sessionId || '');
+      var devId = String(p.deviceId || '');
+      if (id.indexOf('pv_demo_') === 0 || sess.indexOf('sess_demo_') === 0) return false;
+      if (demoDeviceIds.indexOf(devId) !== -1 || devId.toLowerCase().indexOf('demo') !== -1) return false;
+      return true;
     });
-
-    // Sort page views newest first
-    newPvs.sort(function (a, b) { return b.timestamp - a.timestamp; });
-
-    // Merge with existing
-    var existingPvs = storage.get(KEYS.PAGE_VIEWS, []);
-    var merged = newPvs.concat(existingPvs).slice(0, 600);
-    storage.set(KEYS.PAGE_VIEWS, merged);
-    storage.set(KEYS.DEVICES, registry);
-
-    // Also enrich or seed demo leads if none exist
-    var existingLeads = storage.get(KEYS.LEADS, []);
-    if (existingLeads.length === 0) {
-      var sampleLeads = [
-        {
-          id: 'lead_demo_1',
-          name: 'Vikramaditya Singhania',
-          email: 'vikram@singhaniagroup.in',
-          phone: '+91 98201 44521',
-          company: 'Singhania Logistics & Supply',
-          service: 'website',
-          budget: '50k-1l',
-          message: 'Need a complete redesign of our corporate logistics portal with live shipment tracking interface.',
-          status: 'new',
-          timestamp: now - 35 * 60 * 1000,
-          deviceId: 'DEV-A94E-12BF',
-          visitCount: 5,
-          isReturning: true,
-          pastVisitsCount: 4,
-          lastVisit: now - 35 * 60 * 1000,
-          location: {
-            ip: '103.20.110.15',
-            city: 'Mumbai',
-            region: 'Maharashtra',
-            country: 'India',
-            flag: '🇮🇳',
-            lat: 19.0760,
-            lon: 72.8777,
-            isp: 'Reliance Jio 5G'
-          },
-          device: { type: 'desktop', os: 'Windows 10/11', browser: 'Chrome 124', screen: '1920x1080' },
-          journey: [
-            { path: '/index.html', title: 'Fitscalez Home', time: now - 50 * 60 * 1000 },
-            { path: '/services.html', title: 'Services', time: now - 42 * 60 * 1000 },
-            { path: '/contact.html', title: 'Contact', time: now - 35 * 60 * 1000 }
-          ]
-        },
-        {
-          id: 'lead_demo_2',
-          name: 'Ananya Deshmukh',
-          email: 'ananya@organicvedas.com',
-          phone: '+91 94250 88219',
-          company: 'Organic Vedas D2C',
-          service: 'ecommerce',
-          budget: '1l-3l',
-          message: 'Looking for a Shopify/MERN e-commerce store with high converting UI and Razorpay integration.',
-          status: 'contacted',
-          timestamp: now - 4 * 3600 * 1000,
-          deviceId: 'DEV-8C3D-94A1',
-          visitCount: 3,
-          isReturning: true,
-          pastVisitsCount: 2,
-          lastVisit: now - 4 * 3600 * 1000,
-          location: {
-            ip: '103.27.122.34',
-            city: 'Bengaluru',
-            region: 'Karnataka',
-            country: 'India',
-            flag: '🇮🇳',
-            lat: 12.9716,
-            lon: 77.5946,
-            isp: 'Airtel Fiber'
-          },
-          device: { type: 'mobile', os: 'iOS', browser: 'Safari 17', screen: '390x844' },
-          journey: [
-            { path: '/index.html', title: 'Fitscalez Home', time: now - 5 * 3600 * 1000 },
-            { path: '/projects.html', title: 'Projects', time: now - 4.5 * 3600 * 1000 },
-            { path: '/contact.html', title: 'Contact', time: now - 4 * 3600 * 1000 }
-          ]
-        },
-        {
-          id: 'lead_demo_3',
-          name: 'Dr. Harsh Vardhan Jain',
-          email: 'drharsh@jainhealthcare.org',
-          phone: '+91 97551 22904',
-          company: 'Jain Super Speciality Clinic',
-          service: 'seo',
-          budget: '25k-50k',
-          message: 'Want to rank #1 on Google for clinic in Bhopal and Madhya Pradesh. Local SEO and lead generation.',
-          status: 'new',
-          timestamp: now - 18 * 3600 * 1000,
-          deviceId: 'DEV-3B90-67CA',
-          visitCount: 4,
-          isReturning: true,
-          pastVisitsCount: 3,
-          lastVisit: now - 18 * 3600 * 1000,
-          location: {
-            ip: '2409:40c4:21:c298',
-            city: 'Bhopal',
-            region: 'Madhya Pradesh',
-            country: 'India',
-            flag: '🇮🇳',
-            lat: 23.2547,
-            lon: 77.4029,
-            isp: 'Reliance Jio Infocomm Limited'
-          },
-          device: { type: 'tablet', os: 'iOS', browser: 'Safari 17', screen: '820x1180' },
-          journey: [
-            { path: '/blog/what-is-business-intelligence.html', title: 'BI Blog', time: now - 20 * 3600 * 1000 },
-            { path: '/services.html', title: 'Services', time: now - 19 * 3600 * 1000 },
-            { path: '/contact.html', title: 'Contact', time: now - 18 * 3600 * 1000 }
-          ]
-        }
-      ];
-      storage.set(KEYS.LEADS, sampleLeads);
+    if (cleanedPvs.length !== pvs.length) {
+      storage.set(KEYS.PAGE_VIEWS, cleanedPvs);
     }
 
-    return { pageViews: merged.length, devices: Object.keys(registry).length };
+    // 2. Clean Devices Registry
+    var devices = storage.get(KEYS.DEVICES, {});
+    var deviceKeys = Object.keys(devices);
+    var cleanedDevices = {};
+    var changedDevices = false;
+    deviceKeys.forEach(function (k) {
+      var dev = devices[k] || {};
+      var id = String(dev.deviceId || k || '');
+      if (demoDeviceIds.indexOf(id) !== -1 || id.toLowerCase().indexOf('demo') !== -1) {
+        changedDevices = true;
+        return; // skip demo device
+      }
+      cleanedDevices[k] = dev;
+    });
+    if (changedDevices || Object.keys(cleanedDevices).length !== deviceKeys.length) {
+      storage.set(KEYS.DEVICES, cleanedDevices);
+    }
+
+    // 3. Clean Leads
+    var leads = storage.get(KEYS.LEADS, []);
+    var cleanedLeads = leads.filter(function (l) {
+      if (!l) return false;
+      var id = String(l.id || '');
+      var email = String(l.email || '').toLowerCase();
+      var devId = String(l.deviceId || '');
+      if (id.indexOf('lead_demo_') === 0) return false;
+      if (demoDeviceIds.indexOf(devId) !== -1 || devId.toLowerCase().indexOf('demo') !== -1) return false;
+      if (email.indexOf('singhaniagroup.in') !== -1 || email.indexOf('organicvedas.com') !== -1 || email.indexOf('jainhealthcare.org') !== -1) return false;
+      return true;
+    });
+    if (cleanedLeads.length !== leads.length) {
+      storage.set(KEYS.LEADS, cleanedLeads);
+    }
+
+    return {
+      cleanedPageViews: pvs.length - cleanedPvs.length,
+      cleanedDevices: deviceKeys.length - Object.keys(cleanedDevices).length,
+      cleanedLeads: leads.length - cleanedLeads.length
+    };
   }
 
   // Export Analytics CSV
@@ -950,6 +787,7 @@
   if (typeof window !== 'undefined') {
     // If not in iframe or disabled
     try {
+      purgeDemoData();
       trackPageView();
     } catch (e) {
       console.warn('[Fitscalez Tracker] Auto-track exception:', e);
@@ -964,7 +802,7 @@
     fetchLocationData: fetchLocationData,
     getAnalyticsSummary: getAnalyticsSummary,
     getDeviceDossier: getDeviceDossier,
-    generateDemoData: generateDemoData,
+    purgeDemoData: purgeDemoData,
     exportAnalyticsCSV: exportAnalyticsCSV,
     clearAnalyticsData: clearAnalyticsData,
     formatRelativeTime: formatRelativeTime,
